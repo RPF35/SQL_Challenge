@@ -26,7 +26,7 @@ CREATE TABLE "Dept_manager" (
     "dept_no" VARCHAR(10)   NOT NULL,
     "emp_no" INT   NOT NULL,
     CONSTRAINT "pk_Dept_manager" PRIMARY KEY (
-        "dept_no"
+        "emp_no"
      )
 );
 
@@ -69,12 +69,9 @@ REFERENCES "Employees" ("emp_no");
 ALTER TABLE "Dept_manager" ADD CONSTRAINT "fk_Dept_manager_dept_no" FOREIGN KEY("dept_no")
 REFERENCES "Dept" ("dept_no");
 
-ALTER TABLE "Dept_manager" ADD CONSTRAINT "fk_Dept_manager_emp_no" FOREIGN KEY("emp_no")
-REFERENCES "Employees" ("emp_no");
-
 ALTER TABLE "Employees" ADD CONSTRAINT "fk_Employees_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "Salaries" ("emp_no");
 
-ALTER TABLE "Titles" ADD CONSTRAINT "fk_Titles_emp_title_id" FOREIGN KEY("emp_title_id")
-REFERENCES "Employees" ("emp_title_id");
+ALTER TABLE "Employees" ADD CONSTRAINT "fk_Employees_emp_title_id" FOREIGN KEY("emp_title_id")
+REFERENCES "Titles" ("emp_title_id");
 
