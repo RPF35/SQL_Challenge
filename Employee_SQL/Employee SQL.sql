@@ -10,10 +10,11 @@ CREATE TABLE IF NOT EXISTS employees(
 
 
 CREATE TABLE IF NOT EXISTS dept_emp(
-	emp_no INT PRIMARY KEY NOT NULL, 
-	dept_no VARCHAR(10) NOT NULL);
+	emp_no INT NOT NULL, 
+	dept_no VARCHAR(10) NOT NULL,
+	PRIMARY KEY (emp_no,dept_no));
+
 	
-		
 CREATE TABLE IF NOT EXISTS dept(
 	dept_no VARCHAR(10) PRIMARY KEY NOT NULL,
 	dept_name VARCHAR(200) NOT NULL);
@@ -41,7 +42,15 @@ ALTER TABLE employees
     ADD FOREIGN KEY (emp_title_id) REFERENCES Titles(emp_title_id);
 
 ALTER TABLE dept_emp
-	ADD FOREIGN KEY (emp_no) REFERENCES employees(emp_no);	
+	ADD FOREIGN KEY (emp_no) REFERENCES employees(emp_no);
+
+ALTER TABLE dept_emp
+	ADD CONSTRAINT unique_dept_emp_key UNIQUE (emp_no, dept_no);
+
+ALTER TABLE dept_emp DROP CONSTRAINT unique_dept_emp_key;
+
+ALTER TABLE dept
+	ADD CONSTRAINT unique_dept_emp_key UNIQUE (dept_no, dept_name);
 
 ALTER TABLE dept
 	ADD FOREIGN KEY (dept_no) REFERENCES dept_emp(dept_no);
@@ -55,4 +64,4 @@ ALTER TABLE dept_manager
 ALTER TABLE salaries	
 	ADD FOREIGN KEY (emp_no) REFERENCES employees (emp_no);
 	
-	
+
